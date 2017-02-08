@@ -11,11 +11,34 @@ $(document).on('ready', function(){
     // Create a function called `searchImages()`. This function will handle the
     // process of taking a user's search terms and sending them to Flickr for a
     // response.
+var searchImages = function(tags){
+  (function() {
+  var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+  $.getJSON( flickerAPI, {
+    tags: tags,
+    tagmode: "any",
+    format: "json"
+  })
+    .done(function( data ) {
+      $.each( data.items, function( i, item ) {
+        $( "<img>" ).attr( "src", item.media.m ).appendTo( "#images" );
+        if ( i === 100 ) {
+          return false;
+        }
+      });
+    });  
+  })();
+  
+};
 
+
+  
+  
     // Inside the `searchImages()` function, the following things should happen:
 
         // 1.   Accept a string value called `tags` as an argument. Example:
         //      `var searchPhotos = function(tags){`
+
         //
         // 2.   Define the location of the Flickr API like this:
         //      `var flickrAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";`
@@ -30,6 +53,13 @@ $(document).on('ready', function(){
     // Attach an event to the search button (`button.search`) to execute the
     // search when clicked.
 
+  
+  $('button.search').click(function(){
+    event.preventDefault();    
+    
+ var searchTags = $("input:text").val();  
+   searchImages(searchTags);
+  });
         // When the Search button is clicked, the following should happen:
         //
         // 1.   Prevent the default event execution so the browser doesn't
