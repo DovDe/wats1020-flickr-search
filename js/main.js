@@ -11,23 +11,64 @@ $(document).on('ready', function(){
     // Create a function called `searchImages()`. This function will handle the
     // process of taking a user's search terms and sending them to Flickr for a
     // response.
+
 var searchImages = function(tags){
+  
+ 
+  
   (function() {
+    
   var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
   $.getJSON( flickerAPI, {
     tags: tags,
     tagmode: "any",
     format: "json"
   })
+  
+  
+  
     .done(function( data ) {
+    
+
+    $('#images').empty();
+    
       $.each( data.items, function( i, item ) {
-        $( "<img>" ).attr( "src", item.media.m ).appendTo( "#images" );
-        if ( i === 100 ) {
+        
+     var newItem = $('<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 new-item">');  
+     var newP = $('<p class="">');   
+  
+      var newImage = $( "<img class='img-thumbnail avatar'>" ).attr( "src", item.media.m );
+ 
+      
+      var moreInfoButton = $("<button>").text("More Info"); 
+      $(moreInfoButton).addClass("btn btn-primary btn-lg more-info");
+     
+        $(moreInfoButton).attr({'data-toggle': 'modal',
+                               'data-target' : '#infoModal',
+                                'data-title' : item.title, 
+                                'data-author' : item.author,
+                                'data-imgsrc' : item.media.m,
+                                'data-description': item.description,
+                               });
+       
+      
+     
+        
+        
+      newImage.appendTo(newItem); 
+      newP.appendTo(newItem); 
+      moreInfoButton.appendTo(newItem);   
+      $('#images').append(newItem);
+        
+        
+        
+        if ( i === 10 ) {
           return false;
         }
       });
     });  
   })();
+    
   
 };
 
@@ -55,11 +96,36 @@ var searchImages = function(tags){
 
   
   $('button.search').click(function(){
-    event.preventDefault();    
+    
+     
+    event.preventDefault();
     
  var searchTags = $("input:text").val();  
    searchImages(searchTags);
+    
   });
+  
+$('#infoModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var imageTitle = button.data('title'); // Extract info from data-* attributes
+  var imageAuthor = button.data('author');
+  var imageDescription = button.data('description');
+  console.log(imageTitle)
+  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+  var modal = $(this);
+  
+  modal.find('.modal-title').empty();
+  modal.find('.modal-body').empty();
+
+  modal.find('.modal-title').html('<h2>Image Title</h2>' + imageTitle);
+
+  modal.find('.modal-body').html('<h3>Image Author</h3>' + imageAuthor + '<br>' + '<h3>Image Description</h3>' + imageDescription );
+  
+  
+
+})
+
         // When the Search button is clicked, the following should happen:
         //
         // 1.   Prevent the default event execution so the browser doesn't

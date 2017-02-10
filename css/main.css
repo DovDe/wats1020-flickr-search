@@ -27,7 +27,7 @@ ul#images {
     list-style-type: none;
 }
 
-ul#images .placeholder {
+div#images .placeholder {
     font-size: 2em;
     font-weight: lighter;
     color: #666;
@@ -37,6 +37,7 @@ ul#images .placeholder {
 .modal-body img {
     width: 100%;
     height: auto;
+  
 }
 
 hr {
@@ -45,12 +46,16 @@ hr {
 
 
 
+.new-item {
+  height: 300px;
 
+}
 
-
-
-
-
+.avatar {
+  height: 200px;
+  
+    
+}
 
 
 
