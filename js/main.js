@@ -125,11 +125,17 @@ var searchImages = function(tags){
      // this prevents any defaults that would happen apoun clicking on the button
     
     event.preventDefault();
-   
+    
+    
+    // this checks if the user added text to the search
+  if ($("input:text").val()==="") {
+    alert( 'You did not input anything to search your results will be random');
+  } 
     
   // this finds the text input and names it searchtags
     //then calls the function using the searchimages function
- var searchTags = $("input:text").val();  
+ var searchTags = $("input:text").val(); 
+  
    searchImages(searchTags);
     
   });
