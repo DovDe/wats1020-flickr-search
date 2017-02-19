@@ -20,3 +20,22 @@ div#images .placeholder {
 hr {
     clear:both;
 }
+
+ul {
+    margin: 0 auto;
+    text-align: center;
+  list-style-type: none;
+}
+li {
+  
+    display: inline-block;
+    vertical-align: center;
+  margin-top : 3em;
+    margin-bottom : 3em;
+
+  }
+.image {
+ max-height: 150px;
+  
+}
+

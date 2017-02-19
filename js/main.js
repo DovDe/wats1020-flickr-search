@@ -29,23 +29,23 @@ var searchImages = function(tags){
         
         // these next lines I am creating the bootstrap divs to place my content in 
       
-       var newItem = $('<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 new-item">');
+       var newItem = $('<li class="col-xs-3 col-sm-3 col-md-3 col-lg-3 new-item clearfix">');
         
         
         
         
-       var imageRowDiv  =  $('<div class="row">');
+       var imageRowDiv  =  $('<div class="row clearfix">');
        var imageColDiv = $('<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">');        
        var newImage = $( "<img class='img-thumbnail img-responsive image'>" ).attr( "src", item.media.m );
-        
+//         newImage.addClass()
  
-      var buttonsRowDiv = $('<div class="row ">'); 
+      var buttonsRowDiv = $('<div class="row clearfix">'); 
       var buttonsColDiv = $('<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">');  
   
         
-       var descriptionInfoButton =  $("<button type='button' class='btn btn-primary btn-block descriptionInfo ' data-toggle='modal' data-target='#infoModal' data-whatever='@description'>Open modal for @mdo>").text("Description");
+       var descriptionInfoButton =  $("<button type='button' class='btn btn-primary btn-block descriptionInfo clearfix ' data-toggle='modal' data-target='#infoModal' data-whatever='@description'>Open modal for @mdo>").text("Description");
        var authorInfoButton =  $("<button type='button' class='btn btn-primary btn-block authorInfo' data-toggle='modal' data-target='#infoModal' data-whatever='@author'>Open modal for @mdo>").text("Author Info");
-       var sourceInfoButton =  $("<button type='button' class='btn btn-primary btn-block sourceInfo' data-toggle='modal' data-target='#infoModal' data-whatever='@mdo'>Open modal for @mdo>").text("Source Info");
+       var sourceInfoButton =  $("<button type='button' class='btn btn-primary btn-block sourceInfo clearfix' data-toggle='modal' data-target='#infoModal' data-whatever='@mdo'>Open modal for @mdo>").text("Source Info");
  
 
         // these next lines are the button data for my modals
@@ -94,13 +94,13 @@ var searchImages = function(tags){
     
        // here I am actually appending the items into their correct divs  
         
-    var newRow = $('<div class="row new-Row">');
+//     var newRow = $('<div class="row new-Row">');
            
        
     addImage; addButton; descriptionButton; authorButton; sourceButton;
-    newItem.appendTo(newRow);   
+//     newItem.appendTo(newRow);   
     
-    $('#images').append(newRow);
+    $('#images').append(newItem);
         
         if ( i === 16 ) {
           return false;
