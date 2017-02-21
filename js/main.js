@@ -11,6 +11,8 @@ var searchImages = function(tags){
   (function() {
     
   var flickerAPI = "http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?";
+   $('#images').innerHTML = '<li class="search-throbber">Searching...</li>';
+    console.log($('#images').innerHTML);
   $.getJSON( flickerAPI, {
     tags: tags,
     tagmode: "any",
@@ -23,7 +25,7 @@ var searchImages = function(tags){
     
 // this empties out the older search content 
     $('#images').empty();
-    
+    $('h1.search-title').first()[0].innerHTML = "Search for: " + tags;
     
       $.each( data.items, function( i, item ) {
         
@@ -125,6 +127,9 @@ var searchImages = function(tags){
      // this prevents any defaults that would happen apoun clicking on the button
     
     event.preventDefault();
+    var searchTextInput = $(event.target.parentElement).find('input[name="searchText"]')[0];
+    console.log(searchTextInput);
+    searchImages(searchTextInput.value);
     
     
     // this checks if the user added text to the search
